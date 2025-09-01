@@ -1,0 +1,12 @@
+server:
+  port: 8761
+
+# Eureka Related Config
+eureka:
+  instance:
+    hostname: ${EUREKA_SERVICE_HOSTNAME}
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE_URL}

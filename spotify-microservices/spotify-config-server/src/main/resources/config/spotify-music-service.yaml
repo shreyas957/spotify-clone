@@ -1,0 +1,47 @@
+server:
+  port: 8003
+
+spotify:
+  client-id: ${SPOTIFY_CLIENT_ID}
+  client-secret: ${SPOTIFY_CLIENT_SECRET}
+  token-url: https://accounts.spotify.com/api/token
+  api-base-url: https://api.spotify.com/v1
+
+
+spring:
+  # Kafka Config
+  kafka:
+    bootstrap-servers: ${KAFKA_SERVER_URL}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.ncs.spotify.kafka
+    topics:
+      track-played: track.played
+      track-liked: track.liked
+    groups:
+      track-played-group: track-played-group
+      track-liked-group: track-liked-group
+
+
+# Eureka Config
+eureka:
+  instance:
+    hostname: ${EUREKA_SERVICE_HOSTNAME}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE_URL}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

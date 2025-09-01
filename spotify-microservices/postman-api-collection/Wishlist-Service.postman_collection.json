@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "2ab0f48f-31af-41f5-8e00-e92fe0206334",
+		"name": "Wishlist-Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30613034"
+	},
+	"item": [
+		{
+			"name": "add to wishlist",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU2MjQ0OTMsImV4cCI6MTc1NjkyMDQ5M30.tLE1zwQdQMq16hi_xzU55-KhouRKw1OedUdXZTqVHs8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/wishlist/123/add/3AJwUDP919kvQ9QcozQPxg",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"wishlist",
+						"123",
+						"add",
+						"3AJwUDP919kvQ9QcozQPxg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get spotify tracks for User ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU2MjQ0OTMsImV4cCI6MTc1NjkyMDQ5M30.tLE1zwQdQMq16hi_xzU55-KhouRKw1OedUdXZTqVHs8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/wishlist/123",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"wishlist",
+						"123"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove track from",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU2MjQ0OTMsImV4cCI6MTc1NjkyMDQ5M30.tLE1zwQdQMq16hi_xzU55-KhouRKw1OedUdXZTqVHs8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/wishlist/123/remove/3AJwUDP919kvQ9QcozQPxg",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"wishlist",
+						"123",
+						"remove",
+						"3AJwUDP919kvQ9QcozQPxg"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

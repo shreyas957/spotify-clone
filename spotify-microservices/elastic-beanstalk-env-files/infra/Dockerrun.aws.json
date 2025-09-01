@@ -1,0 +1,68 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "mysql",
+      "image": "mysql:8",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        { "hostPort": 3306, "containerPort": 3306 }
+      ],
+      "environment": [
+        { "name": "MYSQL_ROOT_PASSWORD", "value": "password" },
+        { "name": "MYSQL_DATABASE", "value": "user" }
+      ]
+    },
+    {
+      "name": "mongodb",
+      "image": "mongo:6",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        { "hostPort": 27017, "containerPort": 27017 }
+      ],
+      "environment": [
+        { "name": "MONGO_INITDB_DATABASE", "value": "wishlist" }
+      ]
+    },
+    {
+      "name": "redis",
+      "image": "redis:7",
+      "essential": true,
+      "memory": 256,
+      "portMappings": [
+        { "hostPort": 6379, "containerPort": 6379 }
+      ]
+    },
+    {
+      "name": "zookeeper",
+      "image": "confluentinc/cp-zookeeper:7.4.0",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        { "hostPort": 2181, "containerPort": 2181 }
+      ],
+      "environment": [
+        { "name": "ZOOKEEPER_CLIENT_PORT", "value": "2181" },
+        { "name": "ZOOKEEPER_TICK_TIME", "value": "2000" }
+      ]
+    },
+    {
+      "name": "kafka",
+      "image": "confluentinc/cp-kafka:7.4.0",
+      "essential": true,
+      "memory": 1024,
+      "portMappings": [
+        { "hostPort": 9092, "containerPort": 9092 }
+      ],
+      "links": ["zookeeper"],
+      "environment": [
+        { "name": "KAFKA_BROKER_ID", "value": "1" },
+        { "name": "KAFKA_ZOOKEEPER_CONNECT", "value": "zookeeper:2181" },
+        { "name": "KAFKA_ADVERTISED_LISTENERS", "value": "PLAINTEXT://kafka:9092" },
+        { "name": "KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR", "value": "1" }
+      ]
+    }
+  ]
+}

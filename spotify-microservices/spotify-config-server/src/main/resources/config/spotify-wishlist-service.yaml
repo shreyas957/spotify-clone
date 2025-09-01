@@ -1,0 +1,36 @@
+server:
+  port: 8004
+
+spring:
+  # Redis config
+  data:
+    redis:
+      host: ${REDIS_HOST}   # 172.21.55.181 --> Not using wsl IP as it is mapped to localhost
+      port: ${REDIS_PORT}
+  cache:
+    type: redis
+    redis:
+      time-to-live: 86400000  # 24 Hr
+
+
+# Eureka Config
+eureka:
+  instance:
+    hostname: ${EUREKA_SERVICE_HOSTNAME}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE_URL}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          redis:
+            cache: TRACE

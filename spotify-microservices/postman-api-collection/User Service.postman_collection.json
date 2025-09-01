@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "c8d98654-6962-450f-bb42-f004a8aad195",
+		"name": "User Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30613034"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Test User\",\r\n  \"email\": \"test.user@example.com\",\r\n  \"password\": \"testPassword123\",\r\n  \"dateOfBirth\": \"2000-01-01\",\r\n  \"gender\": \"MALE\",\r\n  \"country\": \"Testland\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/users",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Test User new\",\r\n  \"email\": \"test.user@gmail.com\",\r\n  \"password\": \"testPassword123\",\r\n  \"dateOfBirth\": \"2000-01-01\",\r\n  \"gender\": \"MALE\",\r\n  \"country\": \"Testland\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/users/13",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"13"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User By Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Test User new\",\r\n  \"email\": \"test.user@gmail.com\",\r\n  \"password\": \"testPassword123\",\r\n  \"dateOfBirth\": \"2000-01-01\",\r\n  \"gender\": \"MALE\",\r\n  \"country\": \"Testland\"\r\n}"
+				},
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/users/13",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"13"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User By Email",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Test User\",\r\n  \"email\": \"test.user@example.com\",\r\n  \"password\": \"testPassword123\",\r\n  \"dateOfBirth\": \"2000-01-01\",\r\n  \"gender\": \"MALE\",\r\n  \"country\": \"Testland\"\r\n}"
+				},
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/users/by-email?email=test.user@gmail.com",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"by-email"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "test.user@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/users",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/users/13",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"13"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User By email",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/users/by-email?email=test@example.com",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"by-email"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "test@example.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

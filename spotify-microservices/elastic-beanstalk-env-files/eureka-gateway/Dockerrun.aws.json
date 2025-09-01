@@ -1,0 +1,45 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "eureka-server",
+      "image": "shreyas957/spotify-eureka-server:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 8761,
+          "containerPort": 8761
+        }
+      ],
+      "environment": [
+        { "name": "CONFIG_SERVER_URL", "value": "http://config-server:8888" },
+        { "name": "EUREKA_SERVICE_HOSTNAME", "value": "eureka-server" },
+        { "name": "EUREKA_DEFAULT_ZONE_URL", "value": "http://eureka-server:8761/eureka/" }
+      ]
+    },
+    {
+      "name": "api-gateway",
+      "image": "shreyas957/spotify-api-gateway:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 9090,
+          "containerPort": 9090
+        }
+      ],
+      "environment": [
+        { "name": "EUREKA_SERVICE_HOSTNAME", "value": "eureka-server" },
+        { "name": "EUREKA_DEFAULT_ZONE_URL", "value": "http://eureka-server:8761/eureka/" },
+        { "name": "CONFIG_SERVER_URL", "value": "http://config-server:8888" },
+        { "name": "FRONTEND_URL", "value": "http://localhost:4300" },
+        { "name": "USER_SERVICE_HOST", "value": "http://user-service:8001" },
+        { "name": "AUTH_SERVICE_HOST", "value": "http://auth-service:8002" },
+        { "name": "MUSIC_SERVICE_HOST", "value": "http://music-service:8003" },
+        { "name": "WISHLIST_SERVICE_HOST", "value": "http://wishlist-service:8004" },
+        { "name": "AI_LLM_CHAT_SERVICE_HOST", "value": "http://ai-chat-service:8005" }
+      ]
+    }
+  ]
+}

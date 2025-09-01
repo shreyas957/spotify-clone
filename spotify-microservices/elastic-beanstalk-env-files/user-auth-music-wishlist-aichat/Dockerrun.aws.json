@@ -1,0 +1,97 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "user-service",
+      "image": "shreyas957/spotify-user-service:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        { "hostPort": 8001, "containerPort": 8001 }
+      ],
+      "environment": [
+        { "name": "SPRING_DATASOURCE_URL", "value": "jdbc:mysql://mysql:3306/user" },
+        { "name": "SPRING_DATASOURCE_USERNAME", "value": "shreyas" },
+        { "name": "SPRING_DATASOURCE_PASSWORD", "value": "password" },
+        { "name": "KAFKA_SERVER_URL", "value": "kafka:9092" },
+        { "name": "EUREKA_SERVICE_HOSTNAME", "value": "eureka-server" },
+        { "name": "EUREKA_DEFAULT_ZONE_URL", "value": "http://eureka-server:8761/eureka/" },
+        { "name": "CONFIG_SERVER_URL", "value": "http://config-server:8888" }
+      ]
+    },
+    {
+      "name": "auth-service",
+      "image": "shreyas957/spotify-auth-service:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        { "hostPort": 8002, "containerPort": 8002 }
+      ],
+      "environment": [
+        { "name": "SPRING_DATASOURCE_URL", "value": "jdbc:mysql://mysql:3306/auth" },
+        { "name": "SPRING_DATASOURCE_USERNAME", "value": "shreyas" },
+        { "name": "SPRING_DATASOURCE_PASSWORD", "value": "password" },
+        { "name": "KAFKA_SERVER_URL", "value": "kafka:9092" },
+        { "name": "USER_SERVICE_HOST", "value": "http://user-service:8001" },
+        { "name": "EUREKA_SERVICE_HOSTNAME", "value": "eureka-server" },
+        { "name": "EUREKA_DEFAULT_ZONE_URL", "value": "http://eureka-server:8761/eureka/" },
+        { "name": "CONFIG_SERVER_URL", "value": "http://config-server:8888" }
+      ]
+    },
+    {
+      "name": "music-service",
+      "image": "shreyas957/spotify-music-service:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        { "hostPort": 8003, "containerPort": 8003 }
+      ],
+      "environment": [
+        { "name": "SPRING_DATASOURCE_URL", "value": "jdbc:mysql://mysql:3306/music" },
+        { "name": "SPRING_DATASOURCE_USERNAME", "value": "shreyas" },
+        { "name": "SPRING_DATASOURCE_PASSWORD", "value": "password" },
+        { "name": "SPOTIFY_CLIENT_ID", "value": "${SPOTIFY_CLIENT_ID}" },
+        { "name": "SPOTIFY_CLIENT_SECRET", "value": "${SPOTIFY_CLIENT_SECRET}" },
+        { "name": "KAFKA_SERVER_URL", "value": "kafka:9092" },
+        { "name": "EUREKA_SERVICE_HOSTNAME", "value": "eureka-server" },
+        { "name": "EUREKA_DEFAULT_ZONE_URL", "value": "http://eureka-server:8761/eureka/" },
+        { "name": "CONFIG_SERVER_URL", "value": "http://config-server:8888" }
+      ]
+    },
+    {
+      "name": "wishlist-service",
+      "image": "shreyas957/spotify-wishlist-service:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        { "hostPort": 8004, "containerPort": 8004 }
+      ],
+      "environment": [
+        { "name": "SPRING_DATA_MONGODB_URI", "value": "mongodb://mongodb:27017/wishlist" },
+        { "name": "REDIS_HOST", "value": "redis" },
+        { "name": "REDIS_PORT", "value": "6379" },
+        { "name": "MUSIC_SERVICE_HOST", "value": "http://music-service:8003" },
+        { "name": "EUREKA_SERVICE_HOSTNAME", "value": "eureka-server" },
+        { "name": "EUREKA_DEFAULT_ZONE_URL", "value": "http://eureka-server:8761/eureka/" },
+        { "name": "CONFIG_SERVER_URL", "value": "http://config-server:8888" }
+      ]
+    },
+    {
+      "name": "ai-chat-service",
+      "image": "shreyas957/spotify-ai-chat-server:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        { "hostPort": 8005, "containerPort": 8005 }
+      ],
+      "environment": [
+        { "name": "GEMINI_API_KEY", "value": "${GEMINI_API_KEY}" },
+        { "name": "OLLAMA_BASE_URL", "value": "http://host.docker.internal:11434" },
+        { "name": "KAFKA_SERVER_URL", "value": "kafka:9092" },
+        { "name": "EUREKA_SERVICE_HOSTNAME", "value": "eureka-server" },
+        { "name": "EUREKA_DEFAULT_ZONE_URL", "value": "http://eureka-server:8761/eureka/" },
+        { "name": "CONFIG_SERVER_URL", "value": "http://config-server:8888" }
+      ]
+    }
+  ]
+}

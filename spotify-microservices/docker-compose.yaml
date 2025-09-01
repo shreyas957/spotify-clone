@@ -1,0 +1,240 @@
+services:
+  # 1. Config Server
+  config-server:
+    container_name: config-server
+    image: spotify-config-server:latest
+    ports:
+      - "8888:8888"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+
+  # 2. Eureka Server
+  eureka-server:
+    container_name: eureka-server
+    image: spotify-eureka-server:latest
+    ports:
+      - "8761:8761"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+    depends_on:
+      - config-server
+    environment:
+      CONFIG_SERVER_URL: http://config-server:8888
+      EUREKA_SERVICE_HOSTNAME: eureka-server
+      EUREKA_DEFAULT_ZONE_URL: http://eureka-server:8761/eureka/
+
+  # 3. API Gateway
+  api-gateway:
+    container_name: api-gateway
+    image: spotify-api-gateway:latest
+    ports:
+      - "9090:9090"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+    depends_on:
+      - eureka-server
+    environment:
+      EUREKA_SERVICE_HOSTNAME: eureka-server
+      EUREKA_DEFAULT_ZONE_URL: http://eureka-server:8761/eureka/
+      CONFIG_SERVER_URL: http://config-server:8888
+      FRONTEND_URL: http://localhost:4300
+      USER_SERVICE_HOST: http://user-service:8001
+      AUTH_SERVICE_HOST: http://auth-service:8002
+      MUSIC_SERVICE_HOST: http://music-service:8003
+      WISHLIST_SERVICE_HOST: http://wishlist-service:8004
+      AI_LLM_CHAT_SERVICE_HOST: http://ai-chat-service:8005
+
+  # 4. User Service
+  user-service:
+    container_name: user-service
+    image: spotify-user-service:latest
+    ports:
+      - "8001:8001"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+    depends_on:
+      - api-gateway
+      - mysql
+      - kafka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/user
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345
+      KAFKA_SERVER_URL: kafka:9092
+      EUREKA_SERVICE_HOSTNAME: eureka-server
+      EUREKA_DEFAULT_ZONE_URL: http://eureka-server:8761/eureka/
+      CONFIG_SERVER_URL: http://config-server:8888
+
+  # 5. Auth Service
+  auth-service:
+    container_name: auth-service
+    image: spotify-auth-service:latest
+    ports:
+      - "8002:8002"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+    depends_on:
+      - api-gateway
+      - mysql
+      - kafka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/auth
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345
+      KAFKA_SERVER_URL: kafka:9092
+      EUREKA_SERVICE_HOSTNAME: eureka-server
+      EUREKA_DEFAULT_ZONE_URL: http://eureka-server:8761/eureka/
+      CONFIG_SERVER_URL: http://config-server:8888
+      USER_SERVICE_HOST: http://user-service:8001
+
+  # 6. Music Service
+  music-service:
+    container_name: music-service
+    image: spotify-music-service:latest
+    ports:
+      - "8003:8003"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+    depends_on:
+      - api-gateway
+      - mysql
+      - kafka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/music
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345
+      SPOTIFY_CLIENT_ID: ${SPOTIFY_CLIENT_ID}
+      SPOTIFY_CLIENT_SECRET: ${SPOTIFY_CLIENT_SECRET}
+      KAFKA_SERVER_URL: kafka:9092
+      EUREKA_SERVICE_HOSTNAME: eureka-server
+      EUREKA_DEFAULT_ZONE_URL: http://eureka-server:8761/eureka/
+      CONFIG_SERVER_URL: http://config-server:8888
+
+  # 7. Wishlist Service
+  wishlist-service:
+    container_name: wishlist-service
+    image: spotify-wishlist-service:latest
+    ports:
+      - "8004:8004"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+    depends_on:
+      - api-gateway
+      - mongodb
+      - redis
+    environment:
+      CONFIG_SERVER_URL: http://config-server:8888
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/wishlist
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      EUREKA_SERVICE_HOSTNAME: eureka-server
+      EUREKA_DEFAULT_ZONE_URL: http://eureka-server:8761/eureka/
+      MUSIC_SERVICE_HOST: http://music-service:8003
+
+  # 8. AI Chat Service
+  ai-chat-service:
+    container_name: ai-chat-service
+    image: spotify-ai-chat-server:latest
+    ports:
+      - "8005:8005"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+    depends_on:
+      - api-gateway
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      KAFKA_SERVER_URL: kafka:9092
+      EUREKA_SERVICE_HOSTNAME: eureka-server
+      EUREKA_DEFAULT_ZONE_URL: http://eureka-server:8761/eureka/
+      CONFIG_SERVER_URL: http://config-server:8888
+
+  # ---------- INFRASTRUCTURE SERVICES ----------
+
+  # MySQL
+  mysql:
+    container_name: mysql
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: user
+    ports:
+      - "3306:3306"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  # MongoDB
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    environment:
+      MONGO_INITDB_DATABASE: wishlist
+    ports:
+      - "27017:27017"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+
+  # Redis
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+
+  zookeeper:
+    container_name: zookeeper
+    image: confluentinc/cp-zookeeper:7.4.0
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+
+  kafka:
+    container_name: kafka
+    image: confluentinc/cp-kafka:7.4.0
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+
+# ---------- NETWORKS & VOLUMES ----------
+networks:
+  spotify-net:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  mongo-data:
+  redis-data:

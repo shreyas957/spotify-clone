@@ -1,0 +1,75 @@
+server:
+  port: 9090
+
+user:
+  service:
+    host: ${USER_SERVICE_HOST}
+
+auth:
+  service:
+    host: ${AUTH_SERVICE_HOST}
+
+music:
+  service:
+    host: ${MUSIC_SERVICE_HOST}
+
+wishlist:
+  service:
+    host: ${WISHLIST_SERVICE_HOST}
+
+ai-llm-chat:
+  service:
+    host: ${AI_LLM_CHAT_SERVICE_HOST}
+
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: ${FRONTEND_URL}
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+
+security:
+  jwt:
+    secret-key: E88Wuor/eGkI+Q1HxIQkS1EmIybZJiH5DPWPN0s51H4=
+
+eureka:
+  instance:
+    hostname: ${EUREKA_SERVICE_HOSTNAME}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE_URL}
+
+# Spring security logging
+logging:
+  level:
+    org.springframework.security: TRACE
+
+# Swagger UI enable
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: User Service
+        url: /aggregate/user-service/v3/api-docs
+      - name: Auth Service
+        url: /aggregate/auth-service/v3/api-docs
+      - name: Music Service
+        url: /aggregate/music-service/v3/api-docs
+      - name: Wishlist Service
+        url: /aggregate/wishlist-service/v3/api-docs
+      - name: AI LLM Chat Service
+        url: /aggregate/ai-llm-chat-service/v3/api-docs
+  api-docs:
+    enabled: true
+    path: /v3/api-docs

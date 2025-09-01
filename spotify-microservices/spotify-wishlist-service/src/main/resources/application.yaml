@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: spotify-wishlist-service
+
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL}
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/spotify_wishlist_db

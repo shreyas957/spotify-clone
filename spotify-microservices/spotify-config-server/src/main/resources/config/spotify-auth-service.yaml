@@ -1,0 +1,43 @@
+server:
+  port: 8002
+
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_SERVER_URL}
+    consumer:
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.ncs.spotify.event.dto
+
+    topics:
+      user-created: user.created
+      user-updated: user.updated
+      user-deleted: user.deleted
+    groups:
+      user-created: spotify-auth-user-created-group
+      user-updated: spotify-auth-user-updated-group
+      user-deleted: spotify-auth-user-deleted-group
+
+
+# Eureka Config
+eureka:
+  instance:
+    hostname: ${EUREKA_SERVICE_HOSTNAME}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE_URL}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    org.springframework.security: TRACE

@@ -1,0 +1,12 @@
+services:
+  frontend:
+    image: shreyas957/spotify-angular-frontend
+    container_name: spotify-angular-frontend
+    ports:
+      - "4300:4300"
+    networks:
+      - spotify-net
+    restart: unless-stopped
+networks:
+  spotify-net:
+    driver: bridge

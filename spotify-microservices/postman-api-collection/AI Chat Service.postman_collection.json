@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "710a03fb-d501-47dd-8842-130fd79d0f16",
+		"name": "AI Chat Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30613034"
+	},
+	"item": [
+		{
+			"name": "chat",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU2MjQ0OTMsImV4cCI6MTc1NjkyMDQ5M30.tLE1zwQdQMq16hi_xzU55-KhouRKw1OedUdXZTqVHs8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\": \"Suggest some good arjit singh songs\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/chat/gemini",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"chat",
+						"gemini"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

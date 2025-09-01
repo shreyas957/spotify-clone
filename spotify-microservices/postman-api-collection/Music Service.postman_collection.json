@@ -1,0 +1,381 @@
+{
+	"info": {
+		"_postman_id": "7e9359e2-beb1-45a1-93fd-94b375963d9f",
+		"name": "Music Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30613034"
+	},
+	"item": [
+		{
+			"name": "get Track",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/tracks/0gTYGGMUm3dx6BGnGE2sEq",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						"0gTYGGMUm3dx6BGnGE2sEq"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Multiple Tracks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/tracks?market=IN&ids=4uLU6hMCjMI75M1A2tKUQC,368wFmer8wGT6FpPl89D5R",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tracks"
+					],
+					"query": [
+						{
+							"key": "market",
+							"value": "IN"
+						},
+						{
+							"key": "ids",
+							"value": "4uLU6hMCjMI75M1A2tKUQC,368wFmer8wGT6FpPl89D5R"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get users Artists",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/tracks/artists/12",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						"artists",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get artists top tracks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/tracks/artists/top-tracks/0gxyHStUsqpMadRV0Di1Qt",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						"artists",
+						"top-tracks",
+						"0gxyHStUsqpMadRV0Di1Qt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/tracks/search?query=die with a smile&market=IN&limit=5&offset=5",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						"search"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "die with a smile"
+						},
+						{
+							"key": "market",
+							"value": "IN"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						},
+						{
+							"key": "offset",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Track Recommendation - Played",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 101,\r\n  \"trackId\": \"5eLr5u0UcnXjtNZgbnsoYS\",\r\n  \"trackName\": \"Die With A Smile (Acoustic)\",\r\n  \"artistIds\": [\"1HY2Jd0NmPuamShAr6KMms\", \"0du5cEVh5yTK9QJze8zA0C\"],\r\n  \"genres\": [\"pop\", \"rock\"],\r\n  \"msPlayed\": 10,\r\n  \"playedAt\": \"2025-08-20T16:45:30Z\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/recommendation/played",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"recommendation",
+						"played"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Track Recommendation - Liked",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": 101,\r\n  \"trackId\": \"5eLr5u0UcnXjtNZgbnsoYS\",\r\n  \"liked\": true,\r\n  \"likedAt\": \"2025-08-20T16:45:30Z\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/recommendation/liked",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"recommendation",
+						"liked"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Track Recommendation - get Recommendation",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU3MDUyMTAsImV4cCI6MTc1NzAwMTIxMH0.OGqnrHAh3YVGBP_ei2ZJnZF71u7sWzbZbL_s0t-nm-Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/recommendation?userId=101&limit=10&market=IN",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"recommendation"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "101"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "market",
+							"value": "IN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get New Releases",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU5MzgwOTUsImV4cCI6MTc1NzIzNDA5NX0.h59ccWGgK2Quw61wWsSJbAABwK7ivZn4rAMKk0AXgLo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/tracks/albums/new-releases",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						"albums",
+						"new-releases"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Album tracks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZXMiOlsiUk9MRV9VU0VSIl0sInN1YiI6InNocmV5YXMxMjNAZXhhbXBsZS5jb20iLCJpc3MiOiJTaHJleWFzIFNoZXZhbGUiLCJpYXQiOjE3NTU5MzgwOTUsImV4cCI6MTc1NzIzNDA5NX0.h59ccWGgK2Quw61wWsSJbAABwK7ivZn4rAMKk0AXgLo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{spotifyAppBaseUrl}}/api/v1/tracks/albums/1tEu6qNPURb0YfjaRDK23w/tracks",
+					"host": [
+						"{{spotifyAppBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tracks",
+						"albums",
+						"1tEu6qNPURb0YfjaRDK23w",
+						"tracks"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

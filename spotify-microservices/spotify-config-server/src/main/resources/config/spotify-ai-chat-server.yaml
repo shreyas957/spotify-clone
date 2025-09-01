@@ -1,0 +1,29 @@
+server:
+  port: 8005
+
+gemini:
+  api:
+    key: ${GEMINI_API_KEY}
+
+spring:
+  ai:
+    ollama:
+      init:
+        pull-model-strategy: never
+      base-url: ${OLLAMA_BASE_URL}
+      chat:
+        model: llama3.1
+
+# Eureka Config
+eureka:
+  instance:
+    hostname: ${EUREKA_SERVICE_HOSTNAME}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE_URL}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

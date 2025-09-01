@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: spotify-music-service
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL}
+  datasource:
+    url: jdbc:mysql://localhost:3306/spotify_music_local?createDatabaseIfNotExist=true
+    username: root
+    password: 12345
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect

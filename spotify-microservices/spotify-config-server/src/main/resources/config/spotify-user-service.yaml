@@ -1,0 +1,27 @@
+server:
+  port: 8001
+
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_SERVER_URL}  # wsl ip
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    topics:
+      user-created: user.created
+      user-deleted: user.deleted
+      user-updated: user.updated
+
+  # Eureka Config
+eureka:
+  instance:
+    hostname: ${EUREKA_SERVICE_HOSTNAME}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE_URL}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
