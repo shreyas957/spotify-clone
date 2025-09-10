@@ -27,28 +27,7 @@
 ## 🏗️ Architecture Overview
 
 This Spotify clone follows a **microservices architecture** with a clear separation between frontend and backend services:
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Frontend (Angular 20)                    │
-│                        Port: 4300                          │
-└─────────────────────┬───────────────────────────────────────┘
-                      │
-┌─────────────────────┴───────────────────────────────────────┐
-│                   API Gateway (Spring Boot)                │
-│                        Port: 9090                          │
-└─┬─────────┬─────────┬─────────┬─────────┬─────────┬─────────┘
-  │         │         │         │         │         │
-┌─▼──┐ ┌───▼──┐ ┌────▼──┐ ┌───▼───┐ ┌───▼────┐ ┌──▼────┐
-│User│ │ Auth │ │ Music │ │Wishlist│ │AI Chat │ │Config │
-│8001│ │ 8002 │ │ 8003  │ │  8004  │ │  8005  │ │ 8888  │
-└────┘ └──────┘ └───────┘ └────────┘ └────────┘ └───────┘
-  │         │         │         │         │         │
-┌─▼─────────▼─────────▼─────────▼─────────▼─────────▼───┐
-│           Infrastructure Layer                        │
-│  MySQL │ MongoDB │ Redis │ Kafka │ Eureka │ Zookeeper│
-└───────────────────────────────────────────────────────┘
-```
+![Architecture Diagram](docs/images/architecture.png)
 
 ### Core Components
 
@@ -191,6 +170,9 @@ AI_LLM_CHAT_SERVICE_HOST=http://localhost:8005
 
 # Frontend Configuration
 FRONTEND_URL=http://localhost:4300
+
+# Cloud Config URL
+CONFIG_SERVER_URL=http://localhost:8888
 ```
 
 ### 3. Build and Run with Docker (Recommended)
@@ -242,7 +224,7 @@ The Angular frontend configuration is managed through:
 ### Backend Configuration
 
 Each microservice has its own configuration:
-- **Config Server**: Centralized configuration management
+- **Config Server**: Centralized configuration management `spotify-config-server/src/main/resources/config/`
 - **Service-specific**: `application.yml` files in each service
 - **Docker**: Environment variables in `docker-compose.yaml`
 
@@ -358,36 +340,6 @@ API documentation is available via Postman collections in `spotify-microservices
 - `AI Chat Service.postman_collection.json`
 
 Import these collections into Postman for comprehensive API testing.
-
-### Key API Endpoints
-
-#### Authentication
-```
-POST /api/auth/register - User registration
-POST /api/auth/login - User login
-POST /api/auth/refresh - Token refresh
-```
-
-#### Music
-```
-GET /api/music/search - Search tracks/artists/albums
-GET /api/music/track/{id} - Get track details
-GET /api/music/recommendations - Get AI recommendations
-```
-
-#### User
-```
-GET /api/user/profile - Get user profile
-PUT /api/user/profile - Update user profile
-GET /api/user/recently-played - Get listening history
-```
-
-#### Wishlist
-```
-GET /api/wishlist - Get user wishlist
-POST /api/wishlist/add - Add track to wishlist
-DELETE /api/wishlist/{trackId} - Remove from wishlist
-```
 
 ## 🔧 Development
 
@@ -632,5 +584,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 <div align="center">
   <p>⭐ If you found this project helpful, please give it a star!</p>
-  <p>Made with ❤️ by the Spotify Clone community</p>
 </div>

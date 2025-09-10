@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="spotify-config-server" />
+        <module name="spotify-eureka-server" />
+        <module name="spotify-ai-chat-server" />
+        <module name="spotify-api-gateway" />
+        <module name="spotify-auth-service" />
+      </profile>
+      <profile name="Annotation profile for spotify-wishlist-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+        </processorPath>
+        <module name="spotify-wishlist-service" />
+        <module name="spotify-music-service" />
+        <module name="spotify-user-service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="spotify-ai-chat-server" options="-parameters" />
+      <module name="spotify-api-gateway" options="-parameters" />
+      <module name="spotify-auth-service" options="-parameters" />
+      <module name="spotify-config-server" options="-parameters" />
+      <module name="spotify-eureka-server" options="-parameters" />
+      <module name="spotify-music-service" options="-parameters" />
+      <module name="spotify-user-service" options="-parameters" />
+      <module name="spotify-wishlist-service" options="-parameters" />
+    </option>
+  </component>
+</project>
